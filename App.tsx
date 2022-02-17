@@ -1,4 +1,3 @@
-
 import {
   Archivo_400Regular,
   Archivo_500Medium,
@@ -10,6 +9,7 @@ import {
 } from '@expo-google-fonts/inter';
 import AppLoading from 'expo-app-loading';
 import React from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ThemeProvider } from 'styled-components';
 import { Routes } from './src/routes';
 import theme from './src/styles/theme';
@@ -30,9 +30,12 @@ export default function App() {
   }
 
   return(
-    <ThemeProvider theme={theme}>
-      <Routes />
-    </ThemeProvider>
+    <GestureHandlerRootView style={{flex:1}}>
+      <ThemeProvider theme={theme}>
+        <Routes />
+      </ThemeProvider>
+
+    </GestureHandlerRootView>
      
   )
 }
