@@ -8,7 +8,7 @@ interface Props {
 
 export const Container = styled.View`
     flex-direction: row;
-    padding-bottom: 8px;
+    margin-bottom: 8px;
     
 `
 
