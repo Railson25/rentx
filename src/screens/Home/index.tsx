@@ -29,25 +29,22 @@ export function Home() {
         navigation.navigate('CarDetails', {car})
     }
 
-    async function offLineSynchronize() {
+    async function offlineSynchronize(){
         await synchronize({
-            database,
-            pullChanges: async({lastPulledAt}) =>{
-                const response = await api
-                .get(`cars/sync/pull?lastPulledVersion=${lastPulledAt || 0}`)
-
-                const {changes, lastPulledVersion} = response.data
-                return {changes, timestamp: lastPulledVersion}
-            },
-            pushChanges: async ({changes}) =>{
-                const {users} = changes
-                if (users.updated.length > 0) {
-                    await api.post("/users/sync", users);
-                  }
-                
-            }
-        })
-    }
+          database,
+          pullChanges: async ({ lastPulledAt }) => {
+            const response = await api
+            .get(`cars/sync/pull?lastPulledVersion=${lastPulledAt || 0}`);
+            
+            const { changes, latestVersion } = response.data;
+            return { changes, timestamp: latestVersion }
+          },
+          pushChanges: async ({ changes }) => {
+            const user = changes.users;
+            await api.post('/users/sync', user);
+          },
+        });
+      }
 
     useEffect(() => {
         let isMounted = true
@@ -75,7 +72,7 @@ export function Home() {
 
     useEffect(() => {
         if(netInfo.isConnected === true){
-            offLineSynchronize()
+            offlineSynchronize()
         }
     }, [netInfo.isConnected])
 
