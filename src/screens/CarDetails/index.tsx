@@ -8,7 +8,6 @@ import { Accessory } from '../../components/Accessory'
 import { BackButton } from '../../components/BackButton'
 import { Button } from '../../components/Button'
 import { ImageSlider } from '../../components/ImageSlider'
-import { CarDto } from '../../dto/CarDto'
 import { getAccessoryIcon } from '../../utils/getAccessoryIcon'
 import {
     About, Accessories, Brand, CarImages, Container, Description, Details, Footer, Header, Name, Period,
